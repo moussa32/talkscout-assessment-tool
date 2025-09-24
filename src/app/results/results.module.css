@@ -1,0 +1,30 @@
+.container {
+  padding: 40px 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--mantine-color-gray-6);
+  margin-bottom: 30px;
+}
+
+.scoreCard {
+  margin-bottom: 30px;
+  background-color: var(--mantine-color-gray-0);
+}
+
+.questionTitle {
+  font-weight: 600;
+}
+
+.feedbackText {
+  white-space: pre-line;
+  line-height: 1.6;
+}
