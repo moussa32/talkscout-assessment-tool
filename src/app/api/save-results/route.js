@@ -1,13 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabaseServer";
 import { NextResponse } from "next/server";
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
-
 export async function POST(request) {
+  const supabase = await createClient();
   try {
     // Log the start of the request for debugging
     console.log("Starting save-results API request");
@@ -71,8 +66,10 @@ export async function POST(request) {
     };
 
     // Ensure all scores are valid numbers
-    if (isNaN(assessmentData.language_quiz_score)) assessmentData.language_quiz_score = 0;
-    if (isNaN(assessmentData.call_center_score)) assessmentData.call_center_score = 0;
+    if (isNaN(assessmentData.language_quiz_score))
+      assessmentData.language_quiz_score = 0;
+    if (isNaN(assessmentData.call_center_score))
+      assessmentData.call_center_score = 0;
     if (isNaN(assessmentData.total_score)) assessmentData.total_score = 0;
 
     console.log("Inserting new assessment:", assessmentData);

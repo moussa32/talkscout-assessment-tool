@@ -38,7 +38,7 @@ export default function FailedPage() {
   return (
     <Container size={700} className={styles.container}>
       <Paper withBorder p="xl" radius="md" shadow="md" className={styles.paper}>
-        <Group position="center" mb="lg">
+        <Group justify="center" mb="lg">
           <IconAlertTriangle size={50} color="red" />
         </Group>
 
@@ -46,17 +46,17 @@ export default function FailedPage() {
           Assessment Failed
         </Title>
 
-        <Text align="center" size="lg" mb="xl">
+        <Text ta="center" size="lg" mb="xl">
           Your assessment has been terminated because you left the application
           too many times (more than 3 attempts) or for more than 10 seconds.
         </Text>
 
-        <Text align="center" c="dimmed" mb="xl" className={styles.subtitle}>
+        <Text ta="center" c="dimmed" mb="xl" className={styles.subtitle}>
           As mentioned in the rules, you cannot leave or close the tab during
           the assessment.
         </Text>
 
-        <Group position="center">
+        <Group justify="center">
           <Button
             leftSection={<IconArrowLeft size="1rem" />}
             onClick={handleRetry}

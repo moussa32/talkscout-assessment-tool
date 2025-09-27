@@ -80,18 +80,15 @@ export default function AssessmentPage() {
 
   // Use the documentVisibility hook to track when user leaves the page
   useEffect(() => {
-    // Store the current violation count in a ref to avoid dependency issues
-    const currentViolationCount = visibilityViolations;
-
     if (documentVisibility === "hidden") {
       // User left the page - increment violation count
       incrementVisibilityViolations();
 
-      // If this is the max violation, fail immediately
-      if (
-        currentViolationCount >=
-        appConfig.assessment.maxVisibilityViolations - 1
-      ) {
+      // Get current violation count from store to check limit
+      const currentCount = useAssessmentStore.getState().visibilityViolations;
+
+      // If this would exceed the max violations, fail immediately
+      if (currentCount >= appConfig.assessment.maxVisibilityViolations - 1) {
         setAssessmentFailed(true);
         return;
       }
@@ -129,7 +126,7 @@ export default function AssessmentPage() {
       // User returned to the page
       handleReturnToAssessment();
     }
-  }, [documentVisibility, visibilityViolations]); // Remove visibilityViolations from dependencies
+  }, [documentVisibility]); // Removed visibilityViolations from dependencies to prevent infinite loop
 
   // Clean up timers when component unmounts
   useEffect(() => {
@@ -262,15 +259,15 @@ export default function AssessmentPage() {
     return (
       <Container size={700} className={styles.container}>
         <Title className={styles.title}>
-          <Group position="center" spacing="xs">
+          <Group justify="center" spacing="xs">
             <IconLanguage size="1.5rem" stroke={1.5} />
             Language Proficiency Test
           </Group>
         </Title>
-        <Text className={styles.subtitle} align="center">
+        <Text className={styles.subtitle} ta="center">
           Part 1 of 2: Multiple Choice Questions
         </Text>
-        <Text align="center" mb="xl" size="sm" color="dimmed">
+        <Text ta="center" mb="xl" size="sm" color="dimmed">
           Please complete this short language quiz before proceeding to the
           writing assessment.
         </Text>
@@ -289,18 +286,18 @@ export default function AssessmentPage() {
     <>
       <Container size={700} className={styles.container}>
         <Title className={styles.title}>
-          <Group position="center" spacing="xs">
+          <Group justify="center" spacing="xs">
             <IconBrain size="1.5rem" stroke={1.5} />
             {t.assessmentTitle || t.testTitle}
           </Group>
         </Title>
         <Text className={styles.subtitle}>
-          <Group position="center" spacing="xs">
+          <Group justify="center" spacing="xs">
             <IconLanguage size="0.9rem" />
             Part 2 of 2: Writing Assessment
           </Group>
         </Text>
-        <Text align="center" mb="md" size="sm" color="dimmed">
+        <Text ta="center" mb="md" size="sm" color="dimmed">
           Respond to each scenario in{" "}
           {userData.language.charAt(0).toUpperCase() +
             userData.language.slice(1)}

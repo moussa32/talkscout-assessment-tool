@@ -6,14 +6,14 @@ export default function PageHeader({ t, userData }) {
   return (
     <>
       <Box className={styles.title}>
-        <Group position="center" spacing="xs">
+        <Group justify="center" spacing="xs">
           <IconBrain size="1.5rem" stroke={1.5} />
           {t.resultsTitle || "Assessment Results"}
         </Group>
       </Box>
 
       <Box className={styles.subtitle}>
-        <Group position="center" spacing="xs">
+        <Group justify="center" spacing="xs">
           <IconLanguage size="0.9rem" />
           {userData?.name} -{" "}
           {userData?.language.charAt(0).toUpperCase() +
